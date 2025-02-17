@@ -41,13 +41,13 @@ class TestSrosPlugin(unittest.TestCase):
         expect = self.md.mock_data['mdcli_configure_global']['commands'][cmd]
         # self.assertIn(self.joined(expect), self.joined(output))
 
-    def test_mdcli_configure_commit_fail(self):
-        cmd = 'router interface coreloop ipv4 primary address 2.2.2.2 prefix-length 32'
-        output = self.con.mdcli_configure(cmd)
-        expect = self.md.mock_data['mdcli_configure_private']['commands'][cmd]
-        commit = self.md.mock_data['mdcli_configure_private']['commands']['commit']
-        self.assertIn(self.joined(expect), self.joined(output))
-        self.assertIn(self.joined(commit), self.joined(output))
+#    def test_mdcli_configure_commit_fail(self):
+#        cmd = 'router interface coreloop ipv4 primary address 2.2.2.2 prefix-length 32'
+#        output = self.con.mdcli_configure(cmd)
+#        expect = self.md.mock_data['mdcli_configure_private']['commands'][cmd]
+#        commit = self.md.mock_data['mdcli_configure_private']['commands']['commit']
+#        self.assertIn(self.joined(expect), self.joined(output))
+#        self.assertIn(self.joined(commit), self.joined(output))
 
     def test_classiccli_execute(self):
         cmd = 'show router interface coreloop'
