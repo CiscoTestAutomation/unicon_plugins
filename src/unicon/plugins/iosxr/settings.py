@@ -49,6 +49,8 @@ class IOSXRSettings(GenericSettings):
             r'^%\s*Failed to commit.*'
         ]
 
+        self.HA_STANDBY_UNLOCK_COMMANDS = []
+
         self.EXECUTE_MATCHED_RETRIES = 1
         self.EXECUTE_MATCHED_RETRY_SLEEP = 0.1
 

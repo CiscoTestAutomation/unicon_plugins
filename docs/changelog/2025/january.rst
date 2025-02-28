@@ -57,5 +57,3 @@ Changelogs
         * % VLAN [<vlan_id>] already in use
     * Added below config error patterns
         * % VNI <VNI_ID> is either already in use or exceeds the maximum allowable VNIs.
-
-

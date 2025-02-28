@@ -68,6 +68,21 @@ class TestStarosPlugin(unittest.TestCase):
         self.assertTrue('Call Finished - Waiting to trace next matching call' in r)
 
 
+class TestStarosConnect(unittest.TestCase):
+
+    def test_connect(self):
+        c = Connection(hostname='host_name',
+                       start=['mock_device_cli --os staros --state staros_connect2'],
+                       os='staros',
+                       username='cisco',
+                       tacacs_password='cisco',
+                       connection_timeout=15,
+                       mit=True)
+        try:
+            c.connect()
+        finally:
+            c.disconnect()
+
+
 if __name__ == "__main__":
     unittest.main()
-

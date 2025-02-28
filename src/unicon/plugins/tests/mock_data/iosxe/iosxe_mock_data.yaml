@@ -1654,6 +1654,12 @@ transition_to_general_enable2:
     "":
       new_state: general_enable
 
+connection_refused_loop:
+  commands:
+    "":
+      response: |
+        telnet: connect to address 127.0.0.1: Connection refused
+
 
 confirm_abort_copy:
   preface: |
@@ -1681,3 +1687,10 @@ general_enable_no_operating_mode:
   commands:
     <<: *gen_enable_cmds
     "show version | include operating mode" : "unexpected output"
+
+unlicensed_prompt:
+  prompt: "(unlicensed)UUT#"
+  commands:
+    "show version | include operating mode": ""
+    "end":
+      new_state: general_enable

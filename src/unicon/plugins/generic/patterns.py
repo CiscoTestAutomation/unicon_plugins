@@ -51,8 +51,8 @@ class GenericPatterns(UniconCorePatterns):
         self.press_ctrlx = r"^(.*?)Press Ctrl\+x to Exit the session"
         self.connected = r'^(.*?)Connected.'
 
-        self.enter_basic_mgmt_setup = r'Would you like to enter basic management setup\? \[yes/no\]:'
-        self.kerberos_no_realm = r'^(.*)Kerberos:\s*No default realm defined for Kerberos!'
+        self.enter_basic_mgmt_setup = r'Would you like to enter basic management setup\? \[yes/no\]:\s*$'
+        self.kerberos_no_realm = r'^(.*)Kerberos:\s*No default realm defined for Kerberos!\s*$'
 
         self.passphrase_prompt = r'^.*Enter passphrase for key .*?:\s*?'
 

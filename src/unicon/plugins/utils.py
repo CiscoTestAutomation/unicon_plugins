@@ -22,10 +22,13 @@ from unicon.core.errors import UniconAuthenticationError
 from unicon.core.errors import CredentialsExhaustedError
 
 # Declare token types for abstract token discovery
-TOKEN_TYPES = ['os', 'os_flavor', 'version', 'platform', 'model', 'pid']
+TOKEN_TYPES = ['os', 'os_flavor', 'version', 'platform', 'model', 'submodel', 'pid', 'chassis_type']
+OPTIONAL_TOKENS = ['os_flavor']
 ShowVersion = None
 ShowInventory = None
 Uname = None
+PID_TOKEN_FILE = Path(__file__).parent / 'pid_tokens.csv'
+
 
 def _fallback_cred(context):
     return [context['default_cred_name']] \
@@ -234,10 +237,10 @@ class AbstractTokenDiscovery():
         # Import them during object initialization if not already imported
         global ShowVersion
         if not ShowVersion:
-            from genie.libs.parser.generic.show_platform import ShowVersion
+            from genie.libs.parser.generic.rv1.show_platform import ShowVersion
         global ShowInventory
         if not ShowInventory:
-            from genie.libs.parser.generic.show_platform import ShowInventory
+            from genie.libs.parser.generic.rv1.show_platform import ShowInventory
         global Uname
         if not Uname:
             from genie.libs.parser.generic.show_platform import Uname
@@ -249,7 +252,7 @@ class AbstractTokenDiscovery():
 
         # Load the pid token lookup file
         self.pid_data = {}
-        self.pid_lookup_file = Path(__file__).parent / 'pid_tokens.csv'
+        self.pid_lookup_file = PID_TOKEN_FILE
         self.pid_data = load_token_csv_file(file_path=self.pid_lookup_file)
 
         # Attach commands and accompying classes for cleaner looping
@@ -274,9 +277,10 @@ class AbstractTokenDiscovery():
 
 
     def all_tokens_learned(self):
-        for _,token_value in self.learned_tokens.items():
-            if token_value == '' or token_value is None:
-                return False
+        for token ,token_value in self.learned_tokens.items():
+            if token not in OPTIONAL_TOKENS:
+                if token_value == '' or token_value is None:
+                    return False
         return True
 
 
@@ -284,7 +288,7 @@ class AbstractTokenDiscovery():
         try:
             data = self.pid_data[pid_to_check]
         except KeyError:
-            return None
+            return {'pid': pid_to_check}
         else:
             return {
                 'os': data['os'],
@@ -368,6 +372,11 @@ class AbstractTokenDiscovery():
 
                     if cmd == 'show inventory' and \
                             parsed_output.get('inventory_item_index', None):
+
+                        if parsed_output.get('chassis_type'):
+                            self.learned_tokens['chassis_type'] = \
+                                parsed_output.get('chassis_type')
+
                         # Look though pids that were found with show inventory
                         for _,entry_data in \
                                 parsed_output['inventory_item_index'].items():
@@ -535,7 +544,11 @@ class AbstractTokenDiscovery():
     def learn_device_tokens(self, overwrite_testbed_tokens=False):
         if not self.con.device:
             self.con.log.debug('No device object, cannot learn tokens')
-            return
+            return {}
+
+        if self.con.state_machine.current_state == 'standby_locked':
+            self.con.log.info('Device is locked, cannot learn tokens')
+            return {}
 
         if overwrite_testbed_tokens:
             self.con.log.info('+++ Learning device tokens +++')

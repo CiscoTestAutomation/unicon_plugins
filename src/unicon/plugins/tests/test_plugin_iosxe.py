@@ -266,6 +266,29 @@ class TestIosXEPluginConnect(unittest.TestCase):
         finally:
             c.disconnect()
 
+    def test_vpagent_connect(self):
+        c = Connection(hostname='Router',
+                       start=['mock_device_cli --os iosxe --state vpagent_login --hostname Router'],
+                       os='iosxe',
+                       credentials=dict(default=dict(username='cisco', password='cisco')))
+        try:
+            c.connect()
+            self.assertEqual(c.spawn.match.match_output, 'end\r\nRouter#')
+        finally:
+            c.disconnect()
+
+    def test_unlicensed_prompt(self):
+        c = Connection(hostname='UUT',
+                       start=['mock_device_cli --os iosxe --state unlicensed_prompt --hostname UUT'],
+                       os='iosxe',
+                       credentials=dict(default=dict(username='cisco', password='cisco')),
+                       mit=True)
+        try:
+            c.connect()
+            self.assertEqual(c.spawn.match.last_match.group(2), '(unlicensed)')
+        finally:
+            c.disconnect()
+
 
 class TestIosXEPluginExecute(unittest.TestCase):
 

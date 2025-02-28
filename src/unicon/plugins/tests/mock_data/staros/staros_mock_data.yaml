@@ -8,7 +8,7 @@ staros_connect:
 
 staros_exec:
   prompt: "[local]host_name# "
-  commands:
+  commands: &staros_exec_cmds
     "terminal length 0": ""
     "terminal width 512": ""
     "no timestamps": ""
@@ -224,3 +224,16 @@ staros_call_finish:
   prompt: ""
   keys:
     <<: *monitor_keys
+
+
+
+staros_connect2:
+  preface: Escape character is '^]'.
+  prompt: ""
+  commands:
+    "":
+      new_state: staros_exec2
+
+staros_exec2:
+  prompt: "[local] host_name# "
+  commands: *staros_exec_cmds

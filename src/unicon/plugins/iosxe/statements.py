@@ -230,10 +230,11 @@ def boot_finished_deco(func):
     '''
 
     @wraps(func)
-    def wrapper(spawn, context, session):
+    def wrapper(spawn, session, context, **kwargs):
+        args = [a for a in [spawn, session, context] if a]
         if context:
             context.pop('boot_start_time', None)
-        return func(spawn)
+        return func(*args, **kwargs)
     return wrapper
 
 

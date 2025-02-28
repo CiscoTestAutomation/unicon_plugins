@@ -23,11 +23,11 @@ class IosXEPatterns(GenericPatterns):
         self.want_continue_confirm = r'.*Do you want to continue\?\s*\[confirm]\s*$'
         self.want_continue_yes = r'.*Do you want to continue\?\s*\[y/n]\?\s*\[yes]:\s*$'
         self.disable_prompt = \
-            r'^(.*?)(WLC|Router|RouterRP|Switch|ios|switch|%N)([0-9])?(\(standby\))?(-stby)?(-standby)?(\(boot\))?(\(recovery-mode\))?>\s?$'
+            r'^(.*?)(\(unlicensed\))?(WLC|Router|RouterRP|Switch|ios|switch|%N)([0-9])?(\(standby\))?(-stby)?(-standby)?(\(boot\))?(\(recovery-mode\))?>\s?$'
         self.enable_prompt = \
-            r'^(.*?)(WLC|Router|RouterRP|Switch|ios|switch|%N)([0-9])?(\(standby\))?(-stby)?(-standby)?(\(boot\))?(\(recovery-mode\))?#[\s\x07]*$'
+            r'^(.*?)(\(unlicensed\))?(WLC|Router|RouterRP|Switch|ios|switch|%N)([0-9])?(\(standby\))?(-stby)?(-standby)?(\(boot\))?(\(recovery-mode\))?#[\s\x07]*$'
         self.maintenance_mode_prompt = \
-            r'^(.*?)(WLC|Router|RouterRP|Switch|ios|switch|%N)([0-9])?(\(standby\))?(-stby)?(-standby)?(\(boot\))?\(maint-mode\)#[\s\x07]*$'
+            r'^(.*?)(\(unlicensed\))?(WLC|Router|RouterRP|Switch|ios|switch|%N)([0-9])?(\(standby\))?(-stby)?(-standby)?(\(boot\))?\(maint-mode\)#[\s\x07]*$'
         self.press_enter = ReloadPatterns().press_enter
         self.config_prompt = r'^(.*)\((?!.*pki-hexmode).*(con|cfg|ipsec-profile|ca-trustpoint|ca-certificate-map|cs-server|ca-profile|gkm-local-server|cloud|host-list|config-gkm-group|gkm-sa-ipsec|gdoi-coop-ks-config|wsma|enforce-rule|DDNS)\S*\)#\s?$'
 

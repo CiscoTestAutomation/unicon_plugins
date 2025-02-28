@@ -38,5 +38,3 @@ Changelogs
 
 * unicon.plugins
     * Fix syntax warning
-
-

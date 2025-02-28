@@ -5,8 +5,8 @@ from unicon.plugins.generic.patterns import GenericPatterns
 class StarosPatterns(GenericPatterns):
     def __init__(self):
         super().__init__()
-        self.exec_prompt = r'^(.*?)(\[\S+\]%N[#>])\s*$'
-        self.config_prompt = r'^(.*?)(\[\S+\]%N\(\S+\)[#>])\s*$'
+        self.exec_prompt = r'^(.*?)(\[\S+\] ?%N[#>])\s*$'
+        self.config_prompt = r'^(.*?)(\[\S+\] ?%N\(\S+\)[#>])\s*$'
         self.monitor_main_prompt = r'^(.*?\(Q\)uit,\s+<ESC> Prev Menu,\s+<SPACE> Pause,\s+<ENTER> Re-Display Options.*)$'
         self.monitor_sub_prompt = r'^(.*?\(B\)egin Protocol Decoding\s+\(Q\)uit,\s+<ESC> Prev Menu,\s+<ENTER> Re-Display Options\s+Select:)\s*'
         self.yes_no_prompt = r'^(.*?)Are you sure \? \[Yes | No\]:\s*'

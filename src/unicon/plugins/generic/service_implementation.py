@@ -1172,7 +1172,8 @@ class Reload(BaseService):
         except Exception as e:
             if hasattr(con.device, 'clean') and hasattr(con.device.clean, 'device_recovery') and\
                 con.device.clean.device_recovery.get('golden_image'):
-                    con.log.error(f'Reload failed booting device using golden image: {con.device.clean.device_recovery["golden_image"]}')
+                    con.log.exception(f"Reload failed to install with file: {getattr(con.device.clean, 'images', [None])[0]}")
+                    con.log.info(f'Booting the device using golden_image.')
                     con.device.api.device_recovery_boot(golden_image=con.device.clean.device_recovery['golden_image'])
                     con.log.info('Successfully booted the device using golden_image.')
                     raise

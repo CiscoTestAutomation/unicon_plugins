@@ -55,6 +55,7 @@ class GenericSettings(Settings):
         self.CONSOLE_TIMEOUT = 60
         self.BOOT_TIMEOUT = 600
         self.MAX_BOOT_ATTEMPTS = 3
+        self.CONNECTION_REFUSED_MAX_COUNT = 3
 
         # Temporary enable secret used during setup
         # this is used if no password is available

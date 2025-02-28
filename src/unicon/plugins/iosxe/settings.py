@@ -26,6 +26,7 @@ class IosXESettings(GenericSettings):
             r'routing table \S+ does not exist',
             r'^%\s*SR feature is not configured yet, please enable Segment-routing first.',
             r'^%\s*\S+ overlaps with \S+',
+            r'^\S+ / \S+ is an [Ii]nvalid network\.',
             r'^%\S+ is linked to a VRF. Enable \S+ on that VRF first.',
             r'% VRF \S+ not configured',
             r'% Incomplete command.',

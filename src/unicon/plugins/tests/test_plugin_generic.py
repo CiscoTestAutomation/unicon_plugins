@@ -1477,6 +1477,47 @@ class TestGenericConnectionRefused(unittest.TestCase):
                 d.disconnect()
                 md.stop()
 
+    def test_connection_refused_handler_repeat(self):
+        md = MockDeviceTcpWrapper(device_os='iosxe', hostname='R1',
+            port=0, state='connection_refused_loop')
+        md.start()
+        template_testbed = """
+        devices:
+          R1:
+            os: iosxe
+            credentials:
+                default:
+                    username: cisco
+                    password: cisco
+            connections:
+              defaults:
+                class: unicon.Unicon
+              a:
+                protocol: telnet
+                ip: 127.0.0.1
+                port: {}
+            peripherals:
+                terminal_server:
+                    ts: [20]
+          ts:
+            os: ios
+            credentials:
+                default:
+                    username: cisco
+                    password: cisco
+            connections:
+                cli:
+                    command: mock_device_cli --os ios --state exec --hostname ts
+        """.format(md.ports[0])
+        t = loader.load(template_testbed)
+        d = t.devices.R1
+        with self.assertRaisesRegex(unicon.core.errors.ConnectionError,
+                'failed to connect to R1'):
+            try:
+                d.connect()
+            finally:
+                d.disconnect()
+                md.stop()
 
 
 if __name__ == "__main__":

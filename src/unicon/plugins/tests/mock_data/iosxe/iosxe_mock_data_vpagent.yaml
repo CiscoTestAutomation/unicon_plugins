@@ -1,0 +1,200 @@
+vpagent_login:
+  prompt: "Would you like to enter the initial configuration dialog? [yes/no]:"
+  commands:
+    "no":
+      new_state: vpagent_return
+
+vpagent_return:
+  preface: |2
+    Primary Partition created...Size 7559 MB
+
+    Drive communication & 1st Sector Write OK...
+
+    %Error formatting flash2: (Didn't find 55AA signature in System Sector)
+
+    ATA device information structure
+    ------------------------------------
+    Configuration                 : 0x427A
+    Default Cylinder #            : 16383
+    Default Head #                : 15
+    Bytes Per Sector              : 0
+    Default Sectors Per Track     : 63
+    Default Sectors Per Card      : 0
+    Current Cylinder #            : 17475
+    Current Head #                : 15
+    Current Sectors Per Track     : 63
+    Current Sectors Per Card      : 251
+    Serial Number                 : 00000000000000000001
+    Buffer Info                   : 0x0 0x40 0x0
+    Firmware Version              : 00000001
+    Model Number                  : VMware Virtual IDE H
+
+    % IOSv: Failed to create/open configuration file for writing: flash:/nvram
+  prompt: "Press RETURN to get started!"
+  commands:
+    "":
+      new_state: vpagent_exec
+      
+
+vpagent_exec:
+  preface: |2
+    *Mar  1 00:00:00.937: %ATA-6-DEV_FOUND: device 0x1F0
+    *Mar  1 00:00:04.256: %ATA-6-DEV_FOUND: device 0x1F1
+    *Mar  1 00:00:04.256: %ATA-3-DEV_ERROR: Failure on device 0x1F1, unknown filesystem
+    *Mar  1 00:00:04.256: %ATA-3-DEV_ERROR: Failure on device 0x1F1, unknown filesystem
+    *Mar  1 00:00:07.827: %NVRAM-5-CONFIG_NVRAM_NOT_FOUND: NVRAM configuration 'flash:/nvram' could not be found on disk.
+    *Feb 12 19:57:29.114: %MAINBOARD_GE-3-PHY_AUTO_NEG: GigabitEthernet0/0, auto negotiation configuration failed
+    *Feb 12 19:57:29.249: %MAINBOARD_GE-3-PHY_AUTO_NEG: GigabitEthernet0/1, auto negotiation configuration failed
+    *Feb 12 19:57:29.383: %MAINBOARD_GE-3-PHY_AUTO_NEG: GigabitEthernet0/2, auto negotiation configuration failed
+    *Feb 12 19:57:29.518: %MAINBOARD_GE-3-PHY_AUTO_NEG: GigabitEthernet0/3, auto negotiation configuration failed
+    *Feb 12 19:57:29.651: %MAINBOARD_GE-3-PHY_AUTO_NEG: GigabitEthernet0/4, auto negotiation configuration failed
+    *Feb 12 19:57:29.784: %MAINBOARD_GE-3-PHY_AUTO_NEG: GigabitEthernet0/5, auto negotiation configuration failed
+    *Feb 12 19:57:29.917: %MAINBOARD_GE-3-PHY_AUTO_NEG: GigabitEthernet0/6, auto negotiation configuration failed
+    *Feb 12 19:57:30.007: %CTS-6-ENV_DATA_START_STATE: Environment Data Download in start state
+    *Feb 12 19:57:30.162: %PA-3-PA_INIT_FAILED: Performance Agent failed to initialize (Missing Data and APPX License)
+    *Feb 12 19:57:31.029: %LINK-3-UPDOWN: Interface GigabitEthernet0/0, changed state to up
+    *Feb 12 19:57:31.163: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down
+    *Feb 12 19:57:31.298: %LINK-3-UPDOWN: Interface GigabitEthernet0/2, changed state to down
+    *Feb 12 19:57:31.432: %LINK-3-UPDOWN: Interface GigabitEthernet0/3, changed state to down
+    *Feb 12 19:57:31.567: %LINK-3-UPDOWN: Interface GigabitEthernet0/4, changed state to down
+    *Feb 12 19:57:31.700: %LINK-3-UPDOWN: Interface GigabitEthernet0/5, changed state to down
+    *Feb 12 19:57:31.833: %LINK-3-UPDOWN: Interface
+    % IOSv: Failed to create/open configuration file for writing: flash:/nvram
+    GigabitEthernet0/6, changed state to down
+    *Feb 12 19:57:32.029: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+    *Feb 12 19:57:32.163: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to down
+    *Feb 12 19:57:32.298: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/2, changed state to down
+    *Feb 12 19:57:32.432: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/3, changed state to down
+    *Feb 12 19:57:32.567: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/4, changed state to down
+    *Feb 12 19:57:32.700: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/5, changed state to down
+    *Feb 12 19:57:32.833: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/6, changed state to down
+    *Feb 12 19:57:39.572: AUTOINSTALL: GigabitEthernet0/0 is assigned 5.199.0.46
+    *Feb 12 20:00:10.563: %IP-5-WEBINST_KILL: Terminating DNS process
+    *Feb 12 20:00:11.863: %LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to administratively down
+    *Feb 12 20:00:11.901: %LINK-5-CHANGED: Interface GigabitEthernet0/2, changed state to administratively down
+    *Feb 12 20:00:11.937: %LINK-5-CHANGED: Interface GigabitEthernet0/3, changed state to administratively down
+    *Feb 12 20:00:11.973: %LINK-5-CHANGED: Interface GigabitEthernet0/4, changed state to administratively down
+    *Feb 12 20:00:12.009: %LINK-5-CHANGED: Interface GigabitEthernet0/5, changed state to administratively down
+    *Feb 12 20:00:12.044: %LINK-5-CHANGED: Interface GigabitEthernet0/6, changed state to administratively down
+    *Feb 12 20:00:17.577: %ATA-3-DEV_ERROR: Failure on device 0x1F0, reset
+    *Feb 12 20:00:17.579: %ATA-3-DEV_ERROR: Failure on device 0x1F0, reset
+    *Feb 12 20:00:17.580: %ATA-3-DEV_ERROR: Failure on device 0x1F0, reset
+    *Feb 12 20:00:17.580: %ATA-3-DEV_ERROR: Failure on device 0x1F1, unknown filesystem
+    *Feb 12 20:00:17.583: %ATA-3-DEV_ERROR: Failure on device 0x1F0, r
+    **************************************************************************
+    * IOSv - Cisco Systems Confidential                                      *
+    *                                                                        *
+    * This software is provided as is without warranty for internal          *
+    * development and testing purposes only under the terms of the Cisco     *
+    * Early Field Trial agreement.  Under no circumstances may this software *
+    * be used for production purposes or deployed in a production            *
+    * environment.                                                           *
+    *                                                                        *
+    * By using the software, you agree to abide by the terms and conditions  *
+    * of the Cisco Early Field Trial Agreement as well as the terms and      *
+    * conditions of the Cisco End User License Agreement at                  *
+    * http://www.cisco.com/go/eula                                           *
+    *                                                                        *
+    * Unauthorized use or distribution of this software is expressly         *
+    * Prohibited.                                                            *
+
+  prompt: "%N>"
+  commands:
+    "term length 0": ""
+    "term width 0": ""
+    "show version | include operating mode" : ""
+    "show version": &SV |2
+      Cisco IOS Software, IOSv Software (VIOS-TPGEN_ADVENTERPRISEK9-M), Experimental Version 15.4(20140131:100343) [anrajama-tb4_bld_1 132]
+      Copyright (c) 1986-2014 by Cisco Systems, Inc.
+      Compiled Wed 16-Apr-14 13:35 by anrajama
+
+      *** IOSv: UNSUPPORTED DEMO VERSION ONLY ***
+
+      ROM: Bootstrap program is IOSv
+
+      Router uptime is 3 minutes
+      System returned to ROM by reload
+      System image file is "cdrom:/boot/vios-tpgen_adventerprisek9-m"
+      Last reload reason: Unknown reason
+
+
+
+      This product contains cryptographic features and is subject to United
+      States and local country laws governing import, export, transfer and
+      use. Delivery of Cisco cryptographic products does not imply
+      third-party authority to import, export, distribute or use encryption.
+      Importers, exporters, distributors and users are responsible for
+      compliance with U.S. and local country laws. By using this product you
+      agree to comply with applicable laws and regulations. If you are unable
+      to comply with U.S. and local laws, return this product immediately.
+
+      A summary of U.S. laws governing Cisco cryptographic products may be found at:
+      http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+      If you require further assistance please contact us by sending email to
+      export@cisco.com.
+
+      Cisco IOSv (revision 1.0) with  with 946434K/99328K bytes of memory.
+      Processor board ID 931PJ7UMMPU5GJ98ODSYT
+      7 Gigabit Ethernet interfaces
+      DRAM configuration is 72 bits wide with parity disabled.
+      256K bytes of non-volatile configuration memory.
+      4062633K bytes of ATA System CompactFlash 0 (Read/Write)
+      0K bytes of ATA CompactFlash 1 (Read/Write)
+      4062633K bytes of ATA CompactFlash 2 (Read/Write)
+      0K bytes of ATA CompactFlash 3 (Read/Write)
+
+
+
+      Configuration register is 0x0
+
+
+    "enable":
+      new_state: enable_vapagent
+
+
+enable_vapagent:
+  prompt: "%N#"
+  commands:
+    "term length 0": ""
+    "term width 0": ""
+    "show version": *SV
+    "show version | include operating mode" : ""
+
+    "disable":
+      new_state: vapagent_exec
+    "enable": ""
+
+   
+
+    "config term":
+      new_state: config_vpagent
+
+
+
+config_vpagent:
+  prompt: "%N(conf)#"
+  commands:
+    "no logging console": ""
+    "line vty 0 4":
+      new_state: config_line_vpagent
+    "line console 0":
+      new_state: config_line_vpagent
+    "redundancy":
+      new_state: config_vpagent_redundancy
+
+config_line_vpagent:
+  prompt: "%N(config-line)#"
+  commands:
+    "exec-timeout 0": ""
+    "line vty 0 4": ""
+    "end":
+      new_state: enable_vapagent
+
+config_vpagent_redundancy:
+    prompt: "%N(config-red)#"
+    commands:
+      "main-cpu":
+        new_state: config_vpagent_redundancy
+      "end":
+        new_state: enable_vapagent
